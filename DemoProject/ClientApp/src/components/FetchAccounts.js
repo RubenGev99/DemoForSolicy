@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link,Navigate  } from 'react-router-dom';
 
 export class FetchAccounts extends Component {
     static displayName = FetchAccounts.name;
@@ -42,11 +42,15 @@ export class FetchAccounts extends Component {
     }
 
     render() {
-        let contents = this.state.loading
+        let contents =
+        window.location.pathname.split('/')[1] == '' ? 
+            <Navigate to='/accounts'  /> :
+            this.state.loading
             ? <p><em>Loading...</em></p>
             : FetchAccounts.renderAccountsTable(this.state.accounts);
 
         return (
+            
             <div>
                 {contents}
             </div>
